@@ -1,35 +1,63 @@
 
 // Env
 
-var rMode = 'Read';
-var wMode = 'Write';
+var rMode = '<';
+var wMode = '>';
+
+var onEnterCallback = function (args) {
+        console.log('_' , ObjC.Object(args[2]).toString());
+}
+
+var onReadCallback = function (args) {
+        console.log(rMode , ObjC.Object(args[2]).toString());
+}
+
+var onWriteCallback = function (args) {
+        console.log(wMode , ObjC.Object(args[2]).toString());
+}
+
+
+// UIApplication
+
+Interceptor.attach(ObjC.classes.UIApplication['- canOpenURL:'].implementation, {
+    onEnter: function (args) {
+       console.log('canOpenUrl: ', ' - ' , ObjC.Object(args[2]).toString());
+    }
+});
+
+Interceptor.attach(ObjC.classes.UIApplication['- openURL:'].implementation, {
+    onEnter: function (args) {
+        console.log('openURL: ' , ObjC.Object(args[2]).toString());
+    }
+});
+
+
+// NSUserDefaults
+
+Interceptor.attach(ObjC.classes.NSUserDefaults['- objectForKey:'].implementation, {
+    onEnter: onReadCallback
+});
 
 
 // NSURL
 
 Interceptor.attach(ObjC.classes.NSURL['+ fileURLWithPath:'].implementation, {
-    onEnter: function (args) {
-        console.log('write' , ObjC.Object(args[2]).toString());
-    }
+    onEnter: onReadCallback
 });
-
 
 // NSFileManager
 
 Interceptor.attach(ObjC.classes.NSFileManager['- fileExistsAtPath:'].implementation, {
-    onEnter: function (args) {
-        console.log('open' , ObjC.Object(args[2]).toString());
-    }
+    onEnter: onReadCallback
 });
-
 
 // NSString
 
 Interceptor.attach(ObjC.classes.NSString['- writeToFile:atomically:encoding:error:'].implementation, {
-    onEnter: function (args) {
-        console.log('write' , ObjC.Object(args[2]).toString());
-    }
+    onEnter: onWriteCallback
 });
+
+
 
 
 /*
