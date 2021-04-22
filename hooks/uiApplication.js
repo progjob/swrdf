@@ -1,18 +1,11 @@
 
-Interceptor.attach(ObjC.classes.UIApplication['- canOpenURL:'].implementation, {
-    onEnter: function (args) {
-       console.log('canOpenUrl: ', '\n\t', ObjC.Object(args[2]).toString());
-    }
-});
+var hookMethods = ["- canOpenURL:", "- openURL:", "- openURL:options:completionHandler:"]
 
-Interceptor.attach(ObjC.classes.UIApplication['- openURL:'].implementation, {
-    onEnter: function (args) {
-        console.log('openURL: ', '\n\t', ObjC.Object(args[2]).toString());
-    }
-});
-
-Interceptor.attach(ObjC.classes.UIApplication['- openURL:options:completionHandler:'].implementation, {
-    onEnter: function (args) {
-        console.log('openURL:options:completionHandler: ', '\n\t', ObjC.Object(args[2]).toString());
-    }
+hookMethods.forEach(function(m) {
+	var hook = ObjC.classes.UIApplication[m];
+	Interceptor.attach(hook.implementation, {
+		onEnter: function(args) {           
+            console.log(m, '\n\t', ObjC.Object(args[2]).toString());
+		}
+	});
 });
