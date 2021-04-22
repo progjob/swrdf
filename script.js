@@ -1,21 +1,11 @@
 
-Interceptor.attach(ObjC.classes.NSString['- writeToFile:atomically:encoding:error:'].implementation, {
-    onEnter: function (args) {
-        console.log('write' , ObjC.Object(args[2]).toString());
-    }
-});
+// Env
 
-Interceptor.attach(ObjC.classes.NSDictionary['- writeToFile:atomically:encoding:error:'].implementation, {
-    onEnter: function (args) {
-        console.log('write' , ObjC.Object(args[2]).toString());
-    }
-});
+var rMode = 'Read';
+var wMode = 'Write';
 
-Interceptor.attach(ObjC.classes.NSFileManager['- fileExistsAtPath:'].implementation, {
-    onEnter: function (args) {
-        console.log('open' , ObjC.Object(args[2]).toString());
-    }
-});
+
+// NSURL
 
 Interceptor.attach(ObjC.classes.NSURL['+ fileURLWithPath:'].implementation, {
     onEnter: function (args) {
@@ -24,10 +14,25 @@ Interceptor.attach(ObjC.classes.NSURL['+ fileURLWithPath:'].implementation, {
 });
 
 
-// data, array, dict, string
-// String
-/*
+// NSFileManager
 
+Interceptor.attach(ObjC.classes.NSFileManager['- fileExistsAtPath:'].implementation, {
+    onEnter: function (args) {
+        console.log('open' , ObjC.Object(args[2]).toString());
+    }
+});
+
+
+// NSString
+
+Interceptor.attach(ObjC.classes.NSString['- writeToFile:atomically:encoding:error:'].implementation, {
+    onEnter: function (args) {
+        console.log('write' , ObjC.Object(args[2]).toString());
+    }
+});
+
+
+/*
 - (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)useAuxiliaryFile encoding:(NSStringEncoding)enc error:(NSError **)error;
 - (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile encoding:(NSStringEncoding)enc error:(NSError **)error;
 
@@ -43,3 +48,10 @@ Interceptor.attach(ObjC.classes.NSURL['+ fileURLWithPath:'].implementation, {
 
 */
 
+// data, array, dict, string
+
+// Interceptor.attach(ObjC.classes.NSDictionary['- writeToFile:atomically:encoding:error:'].implementation, {
+//     onEnter: function (args) {
+//         console.log('write' , ObjC.Object(args[2]).toString());
+//     }
+// });
