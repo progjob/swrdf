@@ -1,6 +1,5 @@
 
 candidaties:
-	[NSData writeToFile: ]
 	[NSMutableDictionary writeToFile:]
 	[NSArray initWithContentsOfURL:]
 
