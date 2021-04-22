@@ -17,21 +17,6 @@ var onWriteCallback = function (args) {
 }
 
 
-// UIApplication
-
-Interceptor.attach(ObjC.classes.UIApplication['- canOpenURL:'].implementation, {
-    onEnter: function (args) {
-       console.log('canOpenUrl: ', ' - ' , ObjC.Object(args[2]).toString());
-    }
-});
-
-Interceptor.attach(ObjC.classes.UIApplication['- openURL:'].implementation, {
-    onEnter: function (args) {
-        console.log('openURL: ' , ObjC.Object(args[2]).toString());
-    }
-});
-
-
 // NSUserDefaults
 
 Interceptor.attach(ObjC.classes.NSUserDefaults['- objectForKey:'].implementation, {
@@ -45,11 +30,6 @@ Interceptor.attach(ObjC.classes.NSURL['+ fileURLWithPath:'].implementation, {
     onEnter: onReadCallback
 });
 
-// NSFileManager
-
-Interceptor.attach(ObjC.classes.NSFileManager['- fileExistsAtPath:'].implementation, {
-    onEnter: onReadCallback
-});
 
 // NSString
 

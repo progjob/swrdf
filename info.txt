@@ -1,29 +1,15 @@
 
-
 candidaties:
-
-	[[NSFileManager defaultManager] fileExistsAtPath:@"..."]
-
-	[UIApplication sharedApplication] canOpenURL*
-
-	[[UIApplication sharedApplication] canOpenURL:*
 
 	[NSData writeToFile: ]
 	[NSMutableDictionary writeToFile:]
 	[NSArray initWithContentsOfURL:]
-	[NSString writeTo*]
-
-	
+	[NSString writeTo*]	
 
 	[NSUserDefaults setObject
 	[NSUserDefaults stringForKey
 	[NSUserDefaults standardUserDefaults]
 
-	NSURL fileURLWithPath:
-
-	
-
-	[NSFileManager defaultManager]
 
 
 commands:
