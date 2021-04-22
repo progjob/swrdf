@@ -12,6 +12,11 @@ if __name__ == '__main__':
 		name, ext = os.path.splitext(filename)
 
 		if (ext == ".js"):
+
+			
+			print(name)
+
+
 			hook = open(path + os.sep + filename, "r")
 			script = session.create_script(hook.read())
 			script.load()

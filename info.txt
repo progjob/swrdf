@@ -3,7 +3,7 @@ candidaties:
 	[NSData writeToFile: ]
 	[NSMutableDictionary writeToFile:]
 	[NSArray initWithContentsOfURL:]
-	[NSString writeTo*]	
+
 
 commands:
 frida-trace -m "-[NSFileManager fileExistsAtPath:]" -U DVIA
