@@ -1,8 +1,23 @@
 
 var hookMethods = [
-	"- setObject:forKey:", "- setInteger:forKey:", "- setFloat:forKey:", "- setDouble:forKey:", "- setBool:forKey:", "- setURL:forKey:",
-	"- objectForKey:", "- integerForKey:", "- floatForKey:", "- doubleForKey:", "- boolForKey:", "- URLForKey:",
-	"- arrayForKey:", "- dictionaryForKey:", "- dataForKey:", "- stringForKey:", "- stringArrayForKey:",
+	"- setObject:forKey:", 
+	"- setInteger:forKey:", 
+	"- setFloat:forKey:", 
+	"- setDouble:forKey:",
+	"- setBool:forKey:",
+	"- setURL:forKey:",
+	
+	"- objectForKey:",
+	"- integerForKey:",
+	"- floatForKey:",
+	"- doubleForKey:",
+	"- boolForKey:",
+	"- URLForKey:",
+	"- arrayForKey:",
+	"- dictionaryForKey:",
+	"- dataForKey:",
+	"- stringForKey:",
+	"- stringArrayForKey:",
 ];
 
 hookMethods.forEach(function(m) {

@@ -14,7 +14,6 @@ var hookMethods = [
 	"- createDirectoryAtPath:withIntermediateDirectories:attributes:error:",
 	"- createDirectoryAtURL:withIntermediateDirectories:attributes:error:",
 	"- createSymbolicLinkAtURL:withDestinationURL:error:",
-
 	"- createSymbolicLinkAtPath:withDestinationPath:error:",
 	"- createSymbolicLinkAtPath:pathContent:",
 	"- createDirectoryAtPath:attributes:",
