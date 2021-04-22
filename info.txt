@@ -1,19 +1,11 @@
 
 candidaties:
-
 	[NSData writeToFile: ]
 	[NSMutableDictionary writeToFile:]
 	[NSArray initWithContentsOfURL:]
 	[NSString writeTo*]	
 
-	[NSUserDefaults setObject
-	[NSUserDefaults stringForKey
-	[NSUserDefaults standardUserDefaults]
-
-
-
 commands:
-
 frida-trace -m "-[NSFileManager fileExistsAtPath:]" -U DVIA
 frida-trace -m "-[NSURL* *HTTP*]" -U Twitter
 
