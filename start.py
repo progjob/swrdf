@@ -7,13 +7,13 @@ from optparse import OptionParser
 if __name__ == '__main__':
 
 	parser = OptionParser()
-	parser.add_option("-A", "--attach", default = False, action = "store_true")
+	parser.add_option("-U", "--use", default = False, action = "store_true")
 
 	hooks_path = "./hooks"
 	app_to_attach = "FridaTraceApp"
 
 	(options, args) = parser.parse_args()
-	if (options.attach):
+	if (options.use):
 		app_to_attach = str(args[0])
 
 	session = frida.get_usb_device().attach(app_to_attach)
