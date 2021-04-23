@@ -25,5 +25,4 @@ TODO:
 			NSURL. Ложные срабатывания?
 			NSFileHandle. Уровень базовости?
 		Сервисы:
-			Core Data
 			Keychain

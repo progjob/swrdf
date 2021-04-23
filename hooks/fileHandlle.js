@@ -2,7 +2,7 @@
 var hookMethodsDesignated = [
 	"- initWithCoder:",
 	"- initWithFileDescriptor:",
-	"- initWithFileDescriptorcloseOnDealloc:",
+	"- initWithFileDescriptor:closeOnDealloc:",
 ];
 
 var hookMethodsConvenient = [
@@ -16,7 +16,16 @@ var hookMethodsConvenient = [
 ];
 
 hookMethodsDesignated.forEach(function(m) {
-	var hook = ObjC.classes.NSFileHandler[m];
+	var hook = ObjC.classes.NSFileHandle[m];
+	Interceptor.attach(hook.implementation, {
+		onEnter: function(args) {           
+            console.log(m, '\n\t', ObjC.Object(args[2]).toString());
+		}
+	});
+});
+
+hookMethodsConvenient.forEach(function(m) {
+	var hook = ObjC.classes.NSFileHandle[m];
 	Interceptor.attach(hook.implementation, {
 		onEnter: function(args) {           
             console.log(m, '\n\t', ObjC.Object(args[2]).toString());
