@@ -1,18 +1,14 @@
 
 var hookMethodsDesignated = [
 	"- initWithCoder:",
-	"- initWithName:value:",
-
 	"- initFileURLWithPath:",
 	"- initFileURLWithPath:isDirectory:",
 	"- initFileURLWithPath:relativeToURL:",
 	"- initFileURLWithPath:isDirectory:relativeToURL:",
-
 	"- initFileURLWithFileSystemRepresentation:isDirectory:relativeToURL:",
 	"- initWithString:relativeToURL:",
 	"- initWithDataRepresentation:relativeToURL:",
 	"- initAbsoluteURLWithDataRepresentation:relativeToURL:",
-
 ];
 
 hookMethodsDesignated.forEach(function(m) {
