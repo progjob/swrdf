@@ -1,16 +1,25 @@
 
-/*
+var hookMethodsDesignated = [
+	"- initWithCoder:",
+	"- initWithFileDescriptor:",
+	"- initWithFileDescriptorcloseOnDealloc:",
+];
 
-- (instancetype)initWithFileDescriptor:(int)fd;
-- (instancetype)initWithFileDescriptor:(int)fd closeOnDealloc:(BOOL)closeopt
-- (nullable instancetype)initWithCoder:(NSCoder *)coder
+var hookMethodsConvenient = [
+	"+ fileHandleForReadingAtPath:", 
+	"+ fileHandleForWritingAtPath:", 
+	"+ fileHandleForUpdatingAtPath:", 
 
-+ (nullable instancetype)fileHandleForReadingAtPath:(NSString *)path;
-+ (nullable instancetype)fileHandleForWritingAtPath:(NSString *)path;
-+ (nullable instancetype)fileHandleForUpdatingAtPath:(NSString *)path;
+	"+ fileHandleForReadingFromURL:error:", 
+	"+ fileHandleForWritingToURL:error:", 
+	"+ fileHandleForUpdatingURL:error:", 
+];
 
-+ (nullable instancetype)fileHandleForReadingFromURL:(NSURL *)url error:(NSError **)error
-+ (nullable instancetype)fileHandleForWritingToURL:(NSURL *)url error:(NSError **)error
-+ (nullable instancetype)fileHandleForUpdatingURL:(NSURL *)url error:(NSError **)error
-
-*/
+hookMethodsDesignated.forEach(function(m) {
+	var hook = ObjC.classes.NSFileHandler[m];
+	Interceptor.attach(hook.implementation, {
+		onEnter: function(args) {           
+            console.log(m, '\n\t', ObjC.Object(args[2]).toString());
+		}
+	});
+});

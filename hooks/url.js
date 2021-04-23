@@ -1,18 +1,25 @@
 
-/*
+var hookMethodsDesignated = [
+	"- initWithCoder:",
+	"- initWithName:value:",
 
-- (instancetype)initFileURLWithPath:(NSString *)path isDirectory:(BOOL)isDir relativeToURL:(nullable NSURL *)baseURL
-- (instancetype)initFileURLWithPath:(NSString *)path relativeToURL:(nullable NSURL *)baseURL
+	"- initFileURLWithPath:",
+	"- initFileURLWithPath:isDirectory:",
+	"- initFileURLWithPath:relativeToURL:",
+	"- initFileURLWithPath:isDirectory:relativeToURL:",
 
-- (instancetype)initFileURLWithPath:(NSString *)path isDirectory:(BOOL)isDir
-- (instancetype)initFileURLWithPath:(NSString *)path
+	"- initFileURLWithFileSystemRepresentation:isDirectory:relativeToURL:",
+	"- initWithString:relativeToURL:",
+	"- initWithDataRepresentation:relativeToURL:",
+	"- initAbsoluteURLWithDataRepresentation:relativeToURL:",
 
-- (instancetype)initFileURLWithFileSystemRepresentation:(const char *)path isDirectory:(BOOL)isDir relativeToURL:(nullable NSURL *)baseURL
-- (nullable instancetype)initWithString:(NSString *)URLString relativeToURL:(nullable NSURL *)baseURL
-- (instancetype)initWithDataRepresentation:(NSData *)data relativeToURL:(nullable NSURL *)baseURL
-- (instancetype)initAbsoluteURLWithDataRepresentation:(NSData *)data relativeToURL:(nullable NSURL *)baseURL
+];
 
-- (instancetype)initWithName:(NSString *)name value:(nullable NSString *)value
-- (nullable instancetype) initWithCoder:(NSCoder *)coder
-
-*/
+hookMethodsDesignated.forEach(function(m) {
+	var hook = ObjC.classes.NSURL[m];
+	Interceptor.attach(hook.implementation, {
+		onEnter: function(args) {           
+            console.log(m, '\n\t', ObjC.Object(args[2]).toString());
+		}
+	});
+});
