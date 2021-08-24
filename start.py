@@ -1,29 +1,43 @@
 
 import frida
 import sys
-import os 
+import os
 from optparse import OptionParser
 
 if __name__ == '__main__':
 
-	parser = OptionParser()
-	parser.add_option("-U", "--use", default = False, action = "store_true")
+  parser = OptionParser()
+  parser.add_option("-U", "--use", default = False, action = "store_true")
+  parser.add_option("-H", "--host", default = False, action = "store_true")
+  
+  (options, args) = parser.parse_args()
 
-	hooks_path = "./hooks"
-	app_to_attach = "FridaTraceApp"
 
-	(options, args) = parser.parse_args()
-	if (options.use):
-		app_to_attach = str(args[0])
+  device = 0
+  hooks_path = "./hooks"
+  app_to_attach = "FridaTraceApp"
 
-	session = frida.get_usb_device().attach(app_to_attach)
+  #frida-server -l 0.0.0.0
+  if (options.host):
+    mgr = frida.get_device_manager()
+    device = mgr.add_remote_device("192.168.1.61")
+  else:
+    device = frida.get_usb_device()
 
-	for filename in os.listdir(hooks_path):
-		name, ext = os.path.splitext(filename)
 
-		if (ext == ".js"):
-			hook = open(hooks_path + os.sep + filename, "r")
-			script = session.create_script(hook.read())
-			script.load()
+  if (options.use):
+    app_to_attach = str(args[0])
 
-	sys.stdin.read()
+
+  session = device.attach(app_to_attach)
+
+
+  for filename in os.listdir(hooks_path):
+    name, ext = os.path.splitext(filename)
+
+    if (ext == ".js"):
+      hook = open(hooks_path + os.sep + filename, "r")
+      script = session.create_script(hook.read())
+      script.load()
+
+  sys.stdin.read()
